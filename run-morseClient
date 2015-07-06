@@ -1,0 +1,4 @@
+#!/bin/bash
+
+python3 ./rotaryMorseClient.py tahoe.cs.dartmouth.edu 51249
+

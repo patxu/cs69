@@ -1,3 +1,0 @@
-#!/bin/bash
-
-python3 ./client.py tahoe.cs.dartmouth.edu 50269
