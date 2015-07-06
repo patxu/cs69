@@ -3,7 +3,11 @@
 #Some code taken from the Sunfounder Raspberry Pi tutorial.
 
 import sys
+
 from http.client import *
+from socket import error as socket_error
+import errno
+
 import RPi.GPIO as GPIO
 import time
  
@@ -62,9 +66,7 @@ def loop():
 
   address, port = get_arguments()
   connection = HTTPConnection(address, port)
-  connection.request('GET', "start") #send special start request
-  response = connection.getresponse()
-  print(response.read().decode("utf-8"))
+  makeGetRequest(connection, "start") #send special start request
 
   message = "" #the morse code message e.g. "..-"
   while True:
@@ -79,10 +81,21 @@ def loop():
       prevGlobalCounter = globalCounter
     if (time.clock() - lastInputTime > 1 and lastInputTime != 0): #send this information off to the server
       lastInputTime = 0;
-      connection.request('GET', message)
-      response = connection.getresponse()
-      print(response.read().decode("utf-8"))
+      makeGetRequest(connection, message)
       message = ""
+
+#send a get request to the server
+def makeGetRequest(connection, message):
+  try:
+    connection.request('GET', message)
+    response = connection.getresponse()
+    print(response.read().decode("utf-8"))
+  except socket_error as serr:
+    if serr.errno != errno.ECONNREFUSED:
+      raise serr
+    print("Failed to communicate with server. Is the server code running?")
+    exit(1)
+
 
 def destroy():
   GPIO.cleanup()             # Release resource
