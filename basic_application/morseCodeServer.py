@@ -66,7 +66,7 @@ def getMorseCharacter(message):
    inverseMorseAlphabet = dict((v,k) for (k,v) in morseAlphabet.items())
 
    if (message == "start"):
-      string = "\nMorse Code Alphabet\n"
+      string = "\nYou have connected to the Morse Code Rotary Encoder Server\nMorse Code Alphabet\n"
       for k, v in sorted(morseAlphabet.items(), key=itemgetter(0)):
          string += "\t" + k + " " + v + "\n"
       string += "Begin entering your message...\n"
