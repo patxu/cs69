@@ -1,0 +1,4 @@
+﻿Patrick Xu
+Basic RPi Application Discussion
+Rotary Morse Code Encoder
+	My RPi application utilizes the rotary encoder sensor to write encode characters in Morse code. Upon connecting with the server, a list of characters and their Morse code encoding is returned to the client. Dots and dashes are encoded with turns of the rotary encoder.  A clockwise turn of the rotary encoder encodes a dot and a counter-clockwise turn encodes a dash. The sequence of dots and dashes is sent to the server after no input is given to the encoder for one second. The server attempts to match the encoding to a single character in the hard-coded Morse code dictionary. Finally, the server returns either the decoded character or an error message with the unknown encoding.
