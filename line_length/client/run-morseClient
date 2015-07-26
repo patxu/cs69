@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sudo python3 ./morseCodeClient.py moose.cs.dartmouth.edu 51249
