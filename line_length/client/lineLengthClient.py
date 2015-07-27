@@ -97,7 +97,7 @@ if __name__ == '__main__':     # Program start from here
   connection = setup()
   try:
     while 1:
-      makeGetRequest(connection, getReading())
+      makeGetRequest(connection, str(getReading()))
       time.sleep(1)
   except KeyboardInterrupt:
     cleanup()
