@@ -7,7 +7,11 @@ class PithonRequestHandler(BaseHTTPRequestHandler):
       s.send_response(200)
       s.send_header('Content-type', 'text/html')
       s.end_headers()
-      message = ("{0:.2f} cm".format(s.path))
+      if s.path == "start":
+        message = "welcome message"
+      else:
+        distance = float(s.path)
+        message = ("{0:.2f} cm".format(distance))
       s.wfile.write(bytes(message, 'UTF-8'))
       file = open('.lineLength.temp', 'w')
       file.write(message)
