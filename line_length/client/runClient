@@ -1,0 +1,6 @@
+#!/bin/bash
+
+let port=51251
+server="moose.cs.dartmouth.edu"
+
+sudo python3 ./lineLengthClient.py $server $port
