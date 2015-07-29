@@ -88,24 +88,26 @@
 
   <script type="text/javascript">  
     function queryAllTestObjects(){
-        var query = new Parse.Query("Reading");
-        query.find({
-          success: function(results) {
-            $(".users").show();
-            var index;
-            for (index = 0; index < results.length; index++){
-              console.log(index, results[index].get("distance"));
-              var item = document.createElement("LI");
-              var text = document.createTextNode(results[index].get("distance"));
-              item.appendChild(text);
-              document.getElementById("userList").appendChild(item);
-            }
-          },
-
-          error: function(error) {
-            // error is an instance of Parse.Error.
+      var query = new Parse.Query("Reading");
+      query.descending("createdAt");
+      query.limit(10);// value * 3 seconds = how far back you're looking
+      query.find({
+        success: function(results) {
+          $(".users").show();
+          var index;
+          for (index = 0; index < results.length; index++){
+            console.log(index, results[index].get("distance"));
+            var item = document.createElement("LI");
+            var text = document.createTextNode(results[index].get("distance"));
+            item.appendChild(text);
+            document.getElementById("userList").appendChild(item);
           }
-        });
+        },
+
+        error: function(error) {
+          // error is an instance of Parse.Error.
+        }
+      });
     }
   </script>
 
