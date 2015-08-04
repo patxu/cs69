@@ -52,7 +52,7 @@
     <div class="col-md-3 text-center col-md-offset-3">
       <img src="images/KAF_Logo.png" class="img-responsive" alt="KAF logo">
     </div>
-      <h1>0 mins</h1>
+      <h1 id="wait_time">0 mins</h1>
   </div>
   <div class="row text-center">
     <ul style="display:none" id="userList" class="list-unstyled users"></ul>
@@ -82,6 +82,40 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+<script>
+$(document).ready(function(){
+  setInterval(function() {
+      var query = new Parse.Query("Reading");
+      query.descending("createdAt");
+      query.limit(10);// value * 3 seconds = how far back you're looking
+      //while (true) {
+        query.find({
+          success: function(results) {
+            $(".users").show();
+            var index;
+            var sum;
+            for (index = 0; index < results.length; index++){
+              //console.log(index, results[index].get("distance"));
+              var item = document.createElement("LI");
+              var text = document.createTextNode(results[index].get("distance"));
+              item.appendChild(text);
+              document.getElementById("userList").appendChild(item);
+              sum += results[index].get("distance");
+              console.log(results[index].get("distance"));
+            }
+            var avg = sum/results.length;
+            console.log(avg, sum, results.length);
+            document.getElementById("wait_time").innerHTML = avg + " cm";
+            },
+
+          error: function(error) {
+            // error is an instance of Parse.Error.
+          }
+        });
+      //}
+  }, 1000);
+});
+</script>
   <script type="text/javascript">
     Parse.initialize("JRZP6EKCJAPCElSMEetXj2duLFU2Cl3U14x8mfUU", "0FlKb8UhQgOIV5fMPXudpHC1NbDQm8W45wZzxBE4");
   </script>
@@ -91,23 +125,26 @@
       var query = new Parse.Query("Reading");
       query.descending("createdAt");
       query.limit(10);// value * 3 seconds = how far back you're looking
-      query.find({
-        success: function(results) {
-          $(".users").show();
-          var index;
-          for (index = 0; index < results.length; index++){
-            console.log(index, results[index].get("distance"));
-            var item = document.createElement("LI");
-            var text = document.createTextNode(results[index].get("distance"));
-            item.appendChild(text);
-            document.getElementById("userList").appendChild(item);
-          }
-        },
+      //while (true) {
+        document.getElementById("wait_time").innerHTML = "hi " + (new Date()).getTime();
+        query.find({
+          success: function(results) {
+            $(".users").show();
+            var index;
+            for (index = 0; index < results.length; index++){
+              console.log(index, results[index].get("distance"));
+              var item = document.createElement("LI");
+              var text = document.createTextNode(results[index].get("distance"));
+              item.appendChild(text);
+              document.getElementById("userList").appendChild(item);
+            }
+          },
 
-        error: function(error) {
-          // error is an instance of Parse.Error.
-        }
-      });
+          error: function(error) {
+            // error is an instance of Parse.Error.
+          }
+        });
+      //}
     }
   </script>
 
