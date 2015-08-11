@@ -1,5 +1,11 @@
+//run the function immediately upon page loading
 updateTime();
+
+//run the function every 2 seconds
 setInterval(updateTime, 2000);
+
+//queries Parse for Reading objects and converts and average of the 10 most 
+//recent distance measurements to a wait time estimate
 function updateTime(){
   var query = new Parse.Query("Reading");
   query.descending("createdAt");
@@ -16,8 +22,8 @@ function updateTime(){
       }
       else {
         var avg = sum/results.length*0.0328; //cm to feet
-        if (avg > 10) {
-          avg = 10;
+        if (avg < 1) { //closer than 1 foot to the sensor
+          avg = 0;
           console.log("line past sensor!");
         }
         else {
@@ -43,6 +49,7 @@ function updateTime(){
   });
 }
 
+//change a time in seconds to a nicer format
 function formatTime(time){
   var minutes = Math.floor(time/60);
   if (minutes > 0){
