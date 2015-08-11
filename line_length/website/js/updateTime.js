@@ -7,9 +7,10 @@ setInterval(updateTime, 2000);
 //queries Parse for Reading objects and converts and average of the 10 most 
 //recent distance measurements to a wait time estimate
 function updateTime(){
+  var distanceFromFront = 12;
   var query = new Parse.Query("Reading");
   query.descending("createdAt");
-  query.limit(10);// value * 3 seconds = how far back you're looking
+  query.limit(10);
   query.find({
     success: function(results) {
       var index;
@@ -26,11 +27,11 @@ function updateTime(){
           avg = 0;
           console.log("line past sensor!");
         }
-        lineLength = 10 - avg;
+        lineLength = distanceFromFront - avg;
         console.log("line length = ", lineLength);
         var waitTime = 7.416 * lineLength + 1.810; //special function
-        if (lineLength == 10){
-          document.getElementById("KAF-time").innerHTML = ">" + formatTime(waitTime);
+        if (lineLength == distanceFromFront){
+          document.getElementById("KAF-time").innerHTML = "> " + formatTime(waitTime);
         }
         else{
           document.getElementById("KAF-time").innerHTML = formatTime(waitTime);
@@ -54,9 +55,9 @@ function updateTime(){
 
 //change a time in seconds to a nicer format
 function formatTime(time){
-  var minutes = Math.floor(time/60);
+  var minutes = Math.floor(time/60 + 0.5); //rounding + truncate
   if (minutes > 0){
-    if (mintes == 1) {
+    if (minutes == 1) {
       return minutes + " minute"
     }
     else {
