@@ -39,11 +39,16 @@ function updateTime(){
 
         //console.log(results[results.length-1].get("distance"));
         var createdAt = results[0].createdAt;
+        var zeroPadding = "";
+        if (createdAt.getMinutes() <10){
+          zeroPadding = "0";
+        }
         var updated = "Last Updated: " + 
           (createdAt.getMonth()+1) + "/" + 
           createdAt.getDate() + "/" + 
           createdAt.getFullYear() + " at " + 
           createdAt.getHours() + ":" + 
+          zeroPadding + 
           createdAt.getMinutes();
         document.getElementById("last-updated").innerHTML = updated;
       }
