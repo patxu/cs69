@@ -14,7 +14,7 @@ a
 	text-decoration: none;
 }
 
-a:link 
+a:link
 {
 	color: #0a416b;
 }
@@ -24,8 +24,8 @@ a:visited
 	color: #0a416b;
 }
 
-a:hover 
-{ 
+a:hover
+{
 	color: #000;
 	opacity: .7;
 	-webkit-transition: .2s;
@@ -268,8 +268,8 @@ p a
 	border-bottom: 1px dotted #84a0b5;
 }
 
-p a:hover 
-{ 
+p a:hover
+{
 	color: #000;
 	border-bottom: 1px dotted #000;
 }
@@ -340,7 +340,7 @@ p a:hover
 	float: left;
 	border-top: 1px solid #d1d1cc;
 	padding-bottom: 12px;
-	margin-top: 18px; 
+	margin-top: 18px;
 	background-color:#333;
 	color: #fff;
 }

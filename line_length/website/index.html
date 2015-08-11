@@ -1,152 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
   <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="">
+    <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
 
-  <title>Wait Time</title>
+    <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="main.css">
 
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  
-  <!--custom css-->
-  <link href="css/custom.css" rel="stylesheet">
+  </head>
 
-  <!--colors-->
-  <link href="css/palette.css" rel="stylesheet" type="text/css">
+  <body>
 
-  <link href="css/starter-template.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Wait Time Estimator</h1>
+        <p>Line lengths of your favorite campus dining options. Powered by Pilingual.</p>
+        <a href="#">How It Works</a>
+      </div>
     </div>
-  </div>
-</nav>
 
-<div class="jumbotron palette-Red-500 bg">
-  <div class="container">
-    <h1>Wait Time Estimator</h1>
-  </div>
-</div>
+    <div class="neighborhood-guides">
+        <div class="container">
 
-<div class="container">
-  <br></br>
-<div class="row panel palette-Purple-400 bg">
-    <div class="col-md-3 text-center col-md-offset-3">
-      <img src="images/KAF_Logo.png" class="img-responsive" alt="KAF logo">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <img src="images/kaf.jpg">
+                        <div class="words">
+                          <p id="text">0 Min</p>
+                      </div>
+                    </div>
+                    <div class="thumbnail">
+                        <img src="images/novack.jpg">
+                        <div class="words">
+                          <p id="text">0 Min</p>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <img src="images/hop.jpg">
+                        <div class="words">
+                          <p id="text">0 Min</p>
+                      </div>
+
+                    </div>
+                    <div class="thumbnail">
+                        <img src="images/foco.jpg">
+                        <div class="words">
+                          <p id="text">0 Min</p>
+                      </div>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+        </div>
     </div>
-      <h1 id="wait_time">0 mins</h1>
-  </div>
-  <div class="row text-center">
-    <ul style="display:none" id="userList" class="list-unstyled users"></ul>
-  </div>
-  <div class="row text-center">
-    <button type="button" class="btn btn-primary btn-lg" onClick="queryAllTestObjects()">Query Test Objects</button>
-  </div>
-
-</div>
-
-<div class="container">
-
-  <br></br>
-  <br></br>
-
-  <div class="col-sm-12 col-md-2">
-    <a href="https://github.com/patxu/cs69/tree/master/line_length">
-      <img src="images/GitHub_Logo.png" class="img-responsive" alt="github link">
-    </a>
-  </div>
-
-</div>
 
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script>
-$(document).ready(function(){
-  setInterval(function() {
-      var query = new Parse.Query("Reading");
-      query.descending("createdAt");
-      query.limit(10);// value * 3 seconds = how far back you're looking
-      //while (true) {
-        query.find({
-          success: function(results) {
-            $(".users").show();
-            var index;
-            var sum;
-            for (index = 0; index < results.length; index++){
-              //console.log(index, results[index].get("distance"));
-              var item = document.createElement("LI");
-              var text = document.createTextNode(results[index].get("distance"));
-              item.appendChild(text);
-              document.getElementById("userList").appendChild(item);
-              sum += results[index].get("distance");
-              console.log(results[index].get("distance"));
-            }
-            var avg = sum/results.length;
-            console.log(avg, sum, results.length);
-            document.getElementById("wait_time").innerHTML = avg + " cm";
-            },
-
-          error: function(error) {
-            // error is an instance of Parse.Error.
-          }
-        });
-      //}
-  }, 1000);
-});
-</script>
-  <script type="text/javascript">
-    Parse.initialize("JRZP6EKCJAPCElSMEetXj2duLFU2Cl3U14x8mfUU", "0FlKb8UhQgOIV5fMPXudpHC1NbDQm8W45wZzxBE4");
-  </script>
-
-  <script type="text/javascript">  
-    function queryAllTestObjects(){
-      var query = new Parse.Query("Reading");
-      query.descending("createdAt");
-      query.limit(10);// value * 3 seconds = how far back you're looking
-      //while (true) {
-        document.getElementById("wait_time").innerHTML = "hi " + (new Date()).getTime();
-        query.find({
-          success: function(results) {
-            $(".users").show();
-            var index;
-            for (index = 0; index < results.length; index++){
-              console.log(index, results[index].get("distance"));
-              var item = document.createElement("LI");
-              var text = document.createTextNode(results[index].get("distance"));
-              item.appendChild(text);
-              document.getElementById("userList").appendChild(item);
-            }
-          },
-
-          error: function(error) {
-            // error is an instance of Parse.Error.
-          }
-        });
-      //}
-    }
-  </script>
-
-</body>
+    </div>
+  </body>
 </html>

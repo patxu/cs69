@@ -14,7 +14,7 @@ Licence: <a href="http://www.os-templates.com/template-terms">Website Template L
 @import url(portfolio.css);
 
 body{
-	margin:0;
+	margin:220;
 	padding:0;
 	font-size:13px;
 	font-family:Georgia, "Times New Roman", Times, serif;
@@ -38,7 +38,7 @@ a{outline:none; text-decoration:none; color:#A3443E; background-color:#E0E0E0;}
 textarea{
 	background-color:#FAFFFF;
 	border: 5px solid #cccccc;
-	resize: none; 
+	resize: none;
 }
 
 input[type=submit] {
@@ -237,7 +237,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 	text-align:right;
 	line-height:normal;
 	}
-	
+
 /* Featured Block */
 
 .column #featured ul, .column #featured h2, .column #featured p{
