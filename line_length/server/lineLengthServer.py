@@ -7,20 +7,33 @@ from parse_rest.datatypes import Object
 APP_ID = "JRZP6EKCJAPCElSMEetXj2duLFU2Cl3U14x8mfUU"
 REST_API_KEY = "mCpEIYFAgDR7QlMCyIV7PCCzzPlD80P2gOmi1gma"
 
+#global units variable
+units = "ft"
+
 #Parse object
 class Reading(Object):
   pass
 
 class PithonRequestHandler(BaseHTTPRequestHandler):
   def do_GET(s):
+    global units
     s.send_response(200)
     s.send_header('Content-type', 'text/html')
     s.end_headers()
     if s.path == "start":
-      message = "welcome message"
+      message = "\nWelcome to Pi Time, the IoT device to reduce the time spent waiting in line!\n"
+    elif s.path == "cm":
+      units = "cm"
+      message = "Units set to cm."
+    elif s.path == "ft":
+      units = "ft"
+      message = "Units set to ft."
     else:
       distance = float(s.path)
-      message = ("{0:.2f} cm".format(distance))
+      if (units  == "ft"):
+        message = ("{0:.2f} ft".format(distance * 0.0328084))
+      else:
+        message = ("{0:.2f} cm".format(distance))
       readingObj = Object()
       readingObj = Object.factory("Reading")
       readingObj = Reading(distance = distance)

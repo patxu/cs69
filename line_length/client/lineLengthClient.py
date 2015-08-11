@@ -30,6 +30,14 @@ def setup():
   address, port = get_arguments()
   connection = HTTPConnection(address, port)
   makeGetRequest(connection, "start") #send special start request
+  while True:
+    units = input("Choose your distance units (cm/ft): ")
+    if units == "ft" or units == "cm":
+      makeGetRequest(connection, units) #send special start request
+      print("Starting distance measurements!\n")
+      break
+    else:
+      print("Input not recognized! Try again.")
   return connection
 
 def get_arguments():
@@ -55,7 +63,7 @@ def cleanup():
 def getReading():
   # found that the sensor can crash if there isn't a delay here
   # no idea why. If you have odd crashing issues, increase delay
-  time.sleep(0.3)
+  time.sleep(1)
 
   # sensor manual says a pulse length of 10Us will trigger the 
   # sensor to transmit 8 cycles of ultrasonic burst at 40kHz and 
@@ -75,7 +83,7 @@ def getReading():
     signalon = time.time()
 
   timepassed = signalon - signaloff
-  distance = timepassed * 17000
+  distance = timepassed * 17150
 
   return distance
 
@@ -98,7 +106,7 @@ if __name__ == '__main__':     # Program start from here
   try:
     while 1:
       makeGetRequest(connection, str(getReading()))
-      time.sleep(3)
+      time.sleep(1)
   except KeyboardInterrupt:
     cleanup()
 
