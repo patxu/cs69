@@ -55,20 +55,28 @@ function updateTime(){
 
 //change a time in seconds to a nicer format
 function formatTime(time){
-  var minutes = Math.floor(time/60 + 0.5); //rounding + truncate
+  var string = "";
+  var minutes = Math.floor(time/60); //rounding + truncate
+  console.log("time is " + time);
   if (minutes > 0){
     if (minutes == 1) {
-      return minutes + " minute"
+      string = minutes + " minute"
     }
     else {
-      return minutes + " minutes"
+      string = minutes + " minutes"
     }
   }
   var seconds = Math.floor(time%60);
+  if (seconds > 0){
+    if (minutes > 0){
+      string += " ";
+    }
     if (seconds == 1) {
-      return seconds + " second"
+      string += seconds + " second"
     }
     else {
-      return seconds + " seconds"
+      string += seconds + " seconds"
     }
+  }
+  return string;
 }
