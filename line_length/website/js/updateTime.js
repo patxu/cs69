@@ -28,7 +28,7 @@ function updateTime(){
         document.getElementById("KAF-time").innerHTML = time;
 
         //console.log(results[results.length-1].get("distance"));
-        var createdAt = results[index-1].createdAt;
+        var createdAt = results[0].createdAt;
         var updated = "Last Updated: " + (createdAt.getMonth()+1) + "/" + createdAt.getDate() + "/" + createdAt.getFullYear() + " at " + createdAt.getHours() + ":" + createdAt.getMinutes();
         document.getElementById("last-updated").innerHTML = updated;
       }
