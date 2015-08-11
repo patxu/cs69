@@ -24,7 +24,13 @@ function updateTime(){
         if (seconds < 10) {
           zeroPadding = "0";
         }
-        document.getElementById("KAF-time").innerHTML = minutes+ ":" + zeroPadding + seconds;
+        var time = minutes+ ":" + zeroPadding + seconds;
+        document.getElementById("KAF-time").innerHTML = time;
+
+        //console.log(results[results.length-1].get("distance"));
+        var createdAt = results[index-1].createdAt;
+        var updated = "Last Updated: " + (createdAt.getMonth()+1) + "/" + createdAt.getDate() + "/" + createdAt.getFullYear() + " at " + createdAt.getHours() + ":" + createdAt.getMinutes();
+        document.getElementById("last-updated").innerHTML = updated;
       }
     }, error: function(error) {
       console.log(error);
