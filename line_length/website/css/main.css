@@ -11,8 +11,6 @@
 }
 
 .jumbotron {
-  background-color:#4a148c; /*purple 900*/
-  height: 260px;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -20,14 +18,17 @@
 .jumbotron .container {
   position: relative;
   text-align: center;
-  top:40px;
+  top:0px;
 }
 
 .jumbotron h1 {
-  color: #9c27b0; /*purple 500*/
   font-size: 68px;
   font-family: ‘Palatino Linotype’, serif;
   font-weight: bold;
+}
+
+.jumbotron h2 {
+  font-family: ‘Palatino Linotype’, serif;
 }
 
 .jumbotron p {
@@ -37,6 +38,11 @@
 
 .words{
   text-align: center;
+  width: 98%;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.thumbnail {
   width: 100%;
 }
 
@@ -44,7 +50,7 @@
   padding-top: 15px;
   z-index:100;
   position: absolute;
-  bottom: 80px;
+  bottom: 0px;
   color: white;
   font-size: 40px;
   font-family: ‘Palatino Linotype’, serif;
@@ -54,5 +60,4 @@
 .neighborhood-guides {
     padding: 25px;
     background-color: #f3e5f5; /*main backgroundstuff*/
-    border-bottom: 1px solid #dbdbdb;
 }

@@ -2,21 +2,23 @@
 <html>
 
   <head>
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
     <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
 
     <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/palette.css">
 
+    <title>Pi Time</title>
+
   </head>
 
   <body>
 
     <div class="jumbotron palette-Purple-800 bg">
-      <div class="container">
-        <h1 class="palette-Purple-500 text">Wait Time Estimator</h1>
-        <p>Wait times of your favorite campus dining options. Powered by Pilingual.</p>
+      <div class="container palette-Amber-500 text">
+        <h1>Pi Time</h1>
+        <h2>Wait times of your favorite campus dining options. Powered by the Raspberry Pi.</h2>
       </div>
     </div>
 
@@ -28,16 +30,16 @@
                 <div class="col-md-6">
                     <!--KAF-->
                     <div class="thumbnail">
-                      <img src="images/kaf.jpg">
-                      <div class="words">
-                        <p id="KAF-time">Loading</p>
+                      <img src="images/tintKAF.jpg" class="img-rounded">
+                      <div class="words palette-Amber-500 bg">
+                        <p id="KAF-time">Loading...</p>
                       </div>
                     </div>
 
                     <!--Novack-->
                     <div class="thumbnail">
-                        <img src="images/novack.jpg">
-                        <div class="words">
+                        <img src="images/tintNovack.jpg" class="img-rounded">
+                        <div class="words palette-Blue-Grey-500 bg">
                           <p id="Novack-time">Coming Soon!</p>
                       </div>
                     </div>
@@ -46,16 +48,16 @@
                 <!--Hop-->
                 <div class="col-md-6">
                     <div class="thumbnail">
-                        <img src="images/hop.jpg">
-                        <div class="words">
+                        <img src="images/tintHop.jpg" class="img-rounded">
+                        <div class="words palette-Deep-Purple-500 bg">
                           <p id="Hop-time">Coming Soon!</p>
                       </div>
                     </div>
 
                   <!--FoCo-->
                     <div class="thumbnail">
-                        <img src="images/foco.jpg">
-                        <div class="words">
+                        <img src="images/tintFoco.jpg" class="img-rounded">
+                        <div class="words palette-Green-500 bg">
                           <p id="Foco-time">Coming Soon!</p>
                       </div>
                     </div>
@@ -67,54 +69,15 @@
         </div>
     </div>
 
-
-    </div>
-
     <!--javascript functions-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-    <script type="text/javascript">
-      Parse.initialize("JRZP6EKCJAPCElSMEetXj2duLFU2Cl3U14x8mfUU", 
-        "0FlKb8UhQgOIV5fMPXudpHC1NbDQm8W45wZzxBE4");
-    </script>
+    <!--init Parse-->
+    <script src="js/parseInit.js"></script>
 
-    <script>
-      function updateTime(){
-        var query = new Parse.Query("Reading");
-        query.descending("createdAt");
-        query.limit(10);// value * 3 seconds = how far back you're looking
-        query.find({
-          success: function(results) {
-            var index;
-            var sum = 0;
-            for (index = 0; index < results.length; index++){
-              sum = parseFloat(sum) + parseFloat(results[index].get("distance"));
-            }
-            if (isNaN(sum)){
-              document.getElementById("KAF-time").innerHTML = "Not Available";
-            }
-            else {
-              var avg = sum/results.length*0.0328; //cm to feet
-              var waitTime = 7.416 * avg + 1.810; //function
-              var seconds = Math.floor(waitTime%60);
-              var minutes = Math.floor(waitTime/60);
-              console.log("length =", avg);
-              var zeroPadding = "";
-              if (seconds < 10) {
-                zeroPadding = "0";
-              }
-              document.getElementById("KAF-time").innerHTML = minutes+ ":" + zeroPadding + seconds;
-            }
-          }, error: function(error) {
-              console.log(error);
-          }
-        });
-      }
-    </script>
-
-    <script>
-      $(document).ready(setInterval(updateTime, 2000));
-    </script>
+    <!--update times-->
+    <script src="js/updateTime.js"></script>
 
   </body>
+
 </html>

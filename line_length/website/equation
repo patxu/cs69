@@ -1,4 +1,0 @@
-            var waitTime = 7.416 * avg + 1.810;
-            var seconds = Math.floor(waitTime%60);
-            var minutes = Math.floor(waitTime/60);
-            document.getElementById("wait_time").innerHTML = minutes+ ":" + seconds;
