@@ -16,24 +16,48 @@ function updateTime(){
       }
       else {
         var avg = sum/results.length*0.0328; //cm to feet
-        var waitTime = 7.416 * avg + 1.810; //function
-        var seconds = Math.floor(waitTime%60);
-        var minutes = Math.floor(waitTime/60);
-        console.log("length =", avg);
-        var zeroPadding = "";
-        if (seconds < 10) {
-          zeroPadding = "0";
+        if (avg > 10) {
+          avg = 10;
+          console.log("line past sensor!");
         }
-        var time = minutes+ ":" + zeroPadding + seconds;
-        document.getElementById("KAF-time").innerHTML = time;
+        else {
+          lineLength = 10 - avg;
+          console.log("line length = ", lineLength);
+        }
+        var waitTime = 7.416 * lineLength + 1.810; //special function
+        document.getElementById("KAF-time").innerHTML = formatTime(waitTime);
 
         //console.log(results[results.length-1].get("distance"));
         var createdAt = results[0].createdAt;
-        var updated = "Last Updated: " + (createdAt.getMonth()+1) + "/" + createdAt.getDate() + "/" + createdAt.getFullYear() + " at " + createdAt.getHours() + ":" + createdAt.getMinutes();
+        var updated = "Last Updated: " + 
+          (createdAt.getMonth()+1) + "/" + 
+          createdAt.getDate() + "/" + 
+          createdAt.getFullYear() + " at " + 
+          createdAt.getHours() + ":" + 
+          createdAt.getMinutes();
         document.getElementById("last-updated").innerHTML = updated;
       }
     }, error: function(error) {
       console.log(error);
     }
   });
+}
+
+function formatTime(time){
+  var minutes = Math.floor(time/60);
+  if (minutes > 0){
+    if (mintes == 1) {
+      return minutes + " minute"
+    }
+    else {
+      return minutes + " minutes"
+    }
+  }
+  var seconds = Math.floor(time%60);
+    if (seconds == 1) {
+      return seconds + " second"
+    }
+    else {
+      return seconds + " seconds"
+    }
 }
