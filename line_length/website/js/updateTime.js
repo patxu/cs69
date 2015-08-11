@@ -26,12 +26,15 @@ function updateTime(){
           avg = 0;
           console.log("line past sensor!");
         }
-        else {
-          lineLength = 10 - avg;
-          console.log("line length = ", lineLength);
-        }
+        lineLength = 10 - avg;
+        console.log("line length = ", lineLength);
         var waitTime = 7.416 * lineLength + 1.810; //special function
-        document.getElementById("KAF-time").innerHTML = formatTime(waitTime);
+        if (lineLength == 10){
+          document.getElementById("KAF-time").innerHTML = ">" + formatTime(waitTime);
+        }
+        else{
+          document.getElementById("KAF-time").innerHTML = formatTime(waitTime);
+        }
 
         //console.log(results[results.length-1].get("distance"));
         var createdAt = results[0].createdAt;
