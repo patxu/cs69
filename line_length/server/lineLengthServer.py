@@ -4,8 +4,8 @@ from operator import itemgetter
 from parse_rest.connection import register
 from parse_rest.datatypes import Object
 
-APP_ID = "JRZP6EKCJAPCElSMEetXj2duLFU2Cl3U14x8mfUU"
-REST_API_KEY = "mCpEIYFAgDR7QlMCyIV7PCCzzPlD80P2gOmi1gma"
+APP_ID = "need new"
+REST_API_KEY = "need new"
 
 #global units variable
 units = "ft"
